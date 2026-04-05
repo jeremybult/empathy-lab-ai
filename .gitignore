@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+.next/
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Virtual envs
+.venv/
+venv/
+
+# OS files
+.DS_Store
