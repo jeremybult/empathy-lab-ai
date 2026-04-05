@@ -9,10 +9,8 @@ from .storage import MemoryConversationStore
 
 logger = logging.getLogger(__name__)
 
-
 class ProviderAPIError(RuntimeError):
     pass
-
 
 class ChatService:
     def __init__(self, settings: Settings, store: MemoryConversationStore) -> None:

@@ -143,7 +143,6 @@ export default function ChatWidget({ personas }: { personas: Persona[] }) {
     setStatus(`Persona: ${activePersona?.name || 'Selected'}`);
   }, [activePersona?.name, selectedPersona]);
 
-
   async function sendMessage(messageText?: string) {
     const text = (messageText ?? input).trim();
     if (!text || isLoading) return;
@@ -167,8 +166,15 @@ export default function ChatWidget({ personas }: { personas: Persona[] }) {
       });
 
       if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || 'Request failed');
+        let errorMessage = 'Request failed';
+        try {
+          const errorJson = await response.json();
+          errorMessage = errorJson?.detail?.message || errorJson?.detail || errorMessage;
+        } catch {
+          const errorText = await response.text();
+          errorMessage = errorText || errorMessage;
+        }
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();

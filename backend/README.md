@@ -43,7 +43,7 @@ curl -X POST http://localhost:8000/api/chat \
 
 ## Smoke verification
 
-A lightweight smoke script is included and used by CI:
+A lightweight smoke script is included and used in CI:
 
 ```bash
 python scripts/smoke_test.py

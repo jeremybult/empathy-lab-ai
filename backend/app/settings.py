@@ -2,7 +2,6 @@ import os
 from dataclasses import dataclass
 from typing import List
 
-
 @dataclass(frozen=True)
 class Settings:
     app_name: str
@@ -16,12 +15,8 @@ class Settings:
     session_cookie_httponly: bool
     session_cookie_samesite: str
 
-
-
 def _split_csv(raw: str) -> List[str]:
     return [item.strip() for item in raw.split(',') if item.strip()]
-
-
 
 def _bool_env(name: str, default: bool) -> bool:
     raw = os.getenv(name)
@@ -29,12 +24,8 @@ def _bool_env(name: str, default: bool) -> bool:
         return default
     return raw.strip().lower() in {'1', 'true', 'yes', 'on'}
 
-
-
 def _is_production(environment: str) -> bool:
     return environment.strip().lower() in {'prod', 'production'}
-
-
 
 def get_settings() -> Settings:
     environment = os.getenv('ENVIRONMENT', 'development').strip() or 'development'

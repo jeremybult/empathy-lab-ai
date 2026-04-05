@@ -31,8 +31,6 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
-
-
 def resolve_client_id(request: Request, incoming_client_id: str | None) -> str:
     if incoming_client_id:
         return incoming_client_id
@@ -40,8 +38,6 @@ def resolve_client_id(request: Request, incoming_client_id: str | None) -> str:
     if cookie_value:
         return cookie_value
     return str(uuid4())
-
-
 
 def set_session_cookie(response: Response, client_id: str) -> None:
     response.set_cookie(
@@ -53,7 +49,6 @@ def set_session_cookie(response: Response, client_id: str) -> None:
         max_age=60 * 60 * 24 * 30,
     )
 
-
 @app.get('/')
 def root() -> dict:
     return {
@@ -62,7 +57,6 @@ def root() -> dict:
         'docs': '/docs',
         'mode': 'live' if settings.openai_api_key else 'demo',
     }
-
 
 @app.get('/health')
 def health() -> dict:
@@ -73,11 +67,9 @@ def health() -> dict:
         'allowed_origins': settings.allowed_origins,
     }
 
-
 @app.get('/api/personas')
 def personas() -> dict:
     return {'personas': service.get_personas()}
-
 
 @app.get('/api/config')
 def config() -> dict:
@@ -89,7 +81,6 @@ def config() -> dict:
         'session_cookie_httponly': settings.session_cookie_httponly,
         'session_cookie_samesite': settings.session_cookie_samesite,
     }
-
 
 @app.post('/api/chat', response_model=ChatResponse)
 def chat(request: Request, payload: ChatRequest, response: Response) -> ChatResponse:
@@ -132,7 +123,6 @@ def chat(request: Request, payload: ChatRequest, response: Response) -> ChatResp
 
     set_session_cookie(response, client_id)
     return ChatResponse(**result)
-
 
 @app.post('/api/reset', response_model=ResetResponse)
 def reset(request: Request, payload: ResetRequest, response: Response) -> ResetResponse:

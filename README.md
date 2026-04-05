@@ -116,7 +116,7 @@ When users switch personas in the frontend chat widget, the visible transcript i
 
 ## CI deployment verification
 
-GitHub Actions CI now validates deployment readiness with two jobs:
+GitHub Actions CI validates deployment readiness with two jobs:
 
 - Frontend: install dependencies and run `npm run build` in `frontend/`
 - Backend: install dependencies and run `python scripts/smoke_test.py` in `backend/`
