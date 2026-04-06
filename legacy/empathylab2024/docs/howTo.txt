@@ -1,0 +1,1 @@
+Connect pyTest.py to htmlTest.py by changing /run_script on htmlTest page.
